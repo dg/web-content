@@ -10,7 +10,7 @@ composer require dibi/dibi
 
 Release announcements are on [GitHub | https://github.com/dg/dibi/releases].
 
-Requires PHP 7.1 or newer.
+Requires PHP 7.2 or newer.
 
 
 Connecting to Database
@@ -154,7 +154,7 @@ Example:
 $result = $database->query('SELECT * FROM users WHERE name = %s', $name);
 ```
 
-If $name is null, the NULL is inserted into the SQL statement.
+If `$name` is `null`, the `NULL` is inserted into the SQL statement.
 
 If the variable is an array, the modifier is applied to all of its elements and they are inserted into SQL separated by commas:
 
@@ -173,7 +173,7 @@ $result = $database->query('SELECT * FROM %n WHERE %n = ?', $table, $column, $va
 // SELECT * FROM `blog`.`users` WHERE `name` = 'Jim'
 ```
 
-Three special modifiers are available for LIKE:
+Four special modifiers are available for LIKE:
 
 | %like~ | the expression starts with a string
 | %~like | the expression ends with a string
@@ -314,7 +314,7 @@ $database->query('INSERT INTO users', [
 Transaction
 ===========
 
-There are three methods for dealing with transactions:
+There are four methods for dealing with transactions:
 
 ```php
 $database->beginTransaction();
@@ -322,6 +322,10 @@ $database->beginTransaction();
 $database->commit();
 
 $database->rollback();
+
+$database->transaction(function () {
+	// some action
+});
 ```
 
 
@@ -645,4 +649,11 @@ class Model
 }
 ```
 
-*Found a mistake? Please send pull request to "documentation":https://github.com/dg/web-content/tree/dibiphp.com (branch `dibiphp.com`).*
+
+Community Extensions
+====================
+
+Various libraries, ORMs and extensions are being built on top of Dibi. You can find a full list of them on "Packagist":https://packagist.org/packages/dibi/dibi/dependents?order_by=downloads&requires=require.
+
+
+*Found a mistake? Please send pull request to "documentation":https://github.com/dg/web-content/tree/dibi (branch `dibi`).*

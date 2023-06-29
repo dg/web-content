@@ -9,7 +9,7 @@ composer require dibi/dibi
 
 Přehled verzí najdete na stánce [Releases | https://github.com/dg/dibi/releases].
 
-Vyžaduje PHP 7.1 nebo vyšší.
+Vyžaduje PHP 7.2 nebo vyšší.
 
 
 Připojení k databázi
@@ -153,7 +153,7 @@ Příklad:
 $result = $database->query('SELECT * FROM users WHERE name = %s', $name);
 ```
 
-Pokud $name je null, vloží se do SQL příkazu NULL.
+Pokud `$name` je `null`, vloží se do SQL příkazu `NULL`.
 
 Pokud proměnná je pole, tak se modifikátor aplikuje na všechny jeho prvky a ty se vloží do SQL oddělené čárkami:
 
@@ -172,7 +172,7 @@ $result = $database->query('SELECT * FROM %n WHERE %n = ?', $table, $column, $va
 // SELECT * FROM `blog`.`users` WHERE `name` = 'Jim'
 ```
 
-Pro operátor LIKE jsou k dispozici tři speciální modifikátory:
+Pro operátor LIKE jsou k dispozici čtyři speciální modifikátory:
 
 | %like~ | výraz začíná řetězcem
 | %~like | výraz končí řetězcem
@@ -313,7 +313,7 @@ $database->query('INSERT INTO users', [
 Transakce
 =========
 
-Pro práci s transakcemi slouží trojice metod:
+Pro práci s transakcemi slouží čtveřice metod:
 
 ```php
 $database->beginTransaction(); // zahájení transakce
@@ -321,6 +321,10 @@ $database->beginTransaction(); // zahájení transakce
 $database->commit(); // potvrzení
 
 $database->rollback(); // vrácení zpět
+
+$database->transaction(function () {
+	// nejaka akce
+});
 ```
 
 
@@ -644,10 +648,18 @@ class Model
 }
 ```
 
-*Našli jste chybu? Pošlete prosím pull request do "dokumentace":https://github.com/dg/web-content/tree/dibiphp.com (větev `dibiphp.com`).*
+
+Komunitní rozšíření
+===================
+
+Nad Dibi staví nejrůznější knihovny, ORM a rozšíření. Celý jejich seznam najdete na "Packagistu":https://packagist.org/packages/dibi/dibi/dependents?order_by=downloads&requires=require.
+
+
+*Našli jste chybu? Pošlete prosím pull request do "dokumentace":https://github.com/dg/web-content/tree/dibi (větev `dibi`).*
 
 /--comment
 chybí:
 - Fluent
 - DataSource
+- ObjectTranslator
 \--
